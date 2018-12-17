@@ -50,38 +50,34 @@ public class TestJenkinsWithPageObject {
 		PageObjectForTestJenkins page = PageFactory.initElements(driver, PageObjectForTestJenkins.class);
 
 		page.clickManageJenkins();
-		// System.out.print();
-		// assertTrue(driver.findElements(By.xpath("//a[@title='Manage Users']")).size()
-		// > 0);
 
-		assertTrue((driver.findElements(By.xpath("//a[@href='securityRealm/' and @title='Manage Users']")).size() > 0)
-				&& (driver.findElements(By.xpath("//*[@id='main-panel']/div[16]/a/dl/dd[1]")).size() > 0));
+		assertTrue((page.getCreateDeleteModifyUsersThatCanLogInToThisJenkins().isEnabled() && ((page
+				.getManageUsersLink().isEnabled()))));
 
 		page.clickManageUsersLink();
 
-		assertTrue(driver.findElement(By.xpath("//*[@href='addUser']")).isEnabled());
+		assertTrue(page.getCreateUserLink().isEnabled());
 
 		page.clickCreateUserLink();
 
 		assertTrue(page.isFormPresentForReal(), "No suitable forms found!");
 
-		assertTrue(page.checkTextField(driver.findElement(By.name("fullname"))));
-		assertTrue(page.checkTextField(driver.findElement(By.name("email"))));
-		assertTrue(page.checkTextField(driver.findElement(By.xpath("//input[@id='username']"))));
-		assertTrue(page.checkTextField(driver.findElement(By.name("password1"))));
-		assertTrue(page.checkTextField(driver.findElement(By.name("password2"))));
+		assertTrue(page.checkTextField(page.getFullname()));
+		assertTrue(page.checkTextField(page.getEmail()));
+		assertTrue(page.checkTextField(page.getUsername()));
+		assertTrue(page.checkTextField(page.getPassword1()));
+		assertTrue(page.checkTextField(page.getPassword2()));
 
 		page.setFields("someuser", "somepassword", "somepassword", "Some Full Name", "some@addr.dom");
 		page.clickCreateUserButton();
-		assertTrue(driver.findElements(By.xpath("//a[@href='user/someuser/']")).size() > 0);
+		assertTrue(page.getSomeuserLink().isEnabled());
 
 		page.clickdeleteUserLink();
 		assertTrue(page.textMessageEquals("Are you sure about deleting the user from Jenkins?"));
 		page.clickYesButton();
 		assertFalse(driver.findElements(By.xpath("//a[@href='user/someuser/']")).size() > 0);
-		// assertFalse(driver.findElements(By.xpath("//*[@href='user/someuser/delete']")).size()
-		// > 0);
 		assertFalse(page.isDeleteButonExist());
 		assertFalse(driver.findElements(By.xpath("//*[@href='user/admin/delete']")).size() > 0);
+
 	}
 }

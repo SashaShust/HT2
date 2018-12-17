@@ -33,19 +33,19 @@ public class PageObjectForTestJenkins {
 	@FindBy(xpath = "//*[@id='main-panel']/form")
 	private WebElement formWithTextsAndPasswords;
 
-	@FindBy(xpath = "//input[@id='username']")
+	@FindBy(id = "username")
 	private WebElement username;
 
-	@FindBy(xpath = "//input[@name='fullname']")
+	@FindBy(name = "fullname")
 	private WebElement fullname;
 
-	@FindBy(xpath = "//input[@name='email']")
+	@FindBy(name = "email")
 	private WebElement email;
 
-	@FindBy(xpath = "//input[@name='password1']")
+	@FindBy(name = "password1")
 	private WebElement password1;
 
-	@FindBy(xpath = "//input[@name='password2']")
+	@FindBy(name = "password2")
 	private WebElement password2;
 
 	@FindBy(xpath = "//button[@id='yui-gen1-button']")
@@ -63,7 +63,7 @@ public class PageObjectForTestJenkins {
 	@FindBy(xpath = "//button[@id='yui-gen1-button']")
 	private WebElement yes;
 
-	@FindBy(xpath = "/body")
+	@FindBy(xpath = "//*[@href='user/admin/delete']")
 	private WebElement userAdminDelete;
 
 	public PageObjectForTestJenkins(WebDriver driver) {
@@ -81,14 +81,6 @@ public class PageObjectForTestJenkins {
 
 		manageJenkinsLink.click();
 		return this;
-	}
-
-	public WebElement getManageUsersLink() {
-		return manageUsersLink;
-	}
-
-	public WebElement getCreateDeleteModifyUsersThatCanLogInToThisJenkins() {
-		return CreateDeleteModifyUsersThatCanLogInToThisJenkins;
 	}
 
 	public PageObjectForTestJenkins clickManageUsersLink() {
@@ -236,6 +228,42 @@ public class PageObjectForTestJenkins {
 
 	public WebElement getDeleteUserLink() {
 		return deleteUserLink;
+	}
+
+	public WebElement getSomeuserLink() {
+		return someuserLink;
+	}
+
+	public WebElement getFullname() {
+		return fullname;
+	}
+
+	public WebElement getEmail() {
+		return email;
+	}
+
+	public WebElement getUsername() {
+		return username;
+	}
+
+	public WebElement getPassword1() {
+		return password1;
+	}
+
+	public WebElement getPassword2() {
+		return password2;
+	}
+
+	public WebElement getManageUsersLink() {
+		return manageUsersLink;
+	}
+
+	public WebElement getCreateDeleteModifyUsersThatCanLogInToThisJenkins() {
+		return CreateDeleteModifyUsersThatCanLogInToThisJenkins;
+	}
+
+	public WebElement getUserAdminDelete() {
+		return userAdminDelete;
 	}
 
 }
