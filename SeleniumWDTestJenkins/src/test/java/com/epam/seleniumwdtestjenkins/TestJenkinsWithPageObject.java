@@ -17,6 +17,14 @@ import org.testng.annotations.Test;
 
 public class TestJenkinsWithPageObject {
 	String base_url = "http://localhost:8081/";
+	private final String USERNAME = "SashaShust";
+	private final String PASSWORD = "1521739";
+
+	private final String USERNAME_FOR_CREATE_USER = "someuser";
+	private final String FULLNAME_FOR_CREATE_USER = "Some Full Name";
+	private final String EMAIL_FOR_CREATE_USER = "some@addr.dom";
+	private final String PASSWORD_FOR_CREATE_USER = "somepassword";
+
 	StringBuffer verificationErrors = new StringBuffer();
 	WebDriver driver = null;
 
@@ -26,11 +34,11 @@ public class TestJenkinsWithPageObject {
 		driver = new ChromeDriver();
 		driver.manage().window().maximize();
 		driver.manage().timeouts().implicitlyWait(1, TimeUnit.SECONDS);
-		driver.get("http://localhost:8081/");
+		driver.get(base_url);
 		WebElement usernameField = driver.findElement(By.id("j_username"));
-		usernameField.sendKeys("SashaShust");
+		usernameField.sendKeys(USERNAME);
 		WebElement passwordField = driver.findElement(By.xpath("//input[@placeholder='Password']"));
-		passwordField.sendKeys("1521739");
+		passwordField.sendKeys(PASSWORD);
 		WebElement signInButton = driver.findElement(By.xpath("//input[@name='Submit']"));
 		signInButton.click();
 	}
@@ -68,7 +76,8 @@ public class TestJenkinsWithPageObject {
 		assertTrue(page.checkTextField(page.getPassword1()));
 		assertTrue(page.checkTextField(page.getPassword2()));
 
-		page.setFields("someuser", "somepassword", "somepassword", "Some Full Name", "some@addr.dom");
+		page.setFields(USERNAME_FOR_CREATE_USER, PASSWORD_FOR_CREATE_USER, PASSWORD_FOR_CREATE_USER,
+				FULLNAME_FOR_CREATE_USER, EMAIL_FOR_CREATE_USER);
 		page.clickCreateUserButton();
 		assertTrue(page.getSomeuserLink().isEnabled());
 
